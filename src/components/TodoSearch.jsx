@@ -2,6 +2,12 @@ import React from 'react';
 import { TextField } from '@mui/material';
 
 const TodoSearch = () => {
+    
+    /* ----- Functions -----*/
+    const search = (event) => {
+        console.log(event.target.value);
+    }
+
     return (
         <TextField 
             id='search-input'
@@ -9,6 +15,7 @@ const TodoSearch = () => {
             variant='outlined' 
             size='small'
             fullWidth
+            onChange={search}
         />
     );
 }

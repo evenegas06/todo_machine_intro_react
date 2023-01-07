@@ -3,3 +3,7 @@
     height: auto;
     margin: 0 auto;
 }
+
+.delete-icon:hover {
+    color: red;
+}

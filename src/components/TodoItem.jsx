@@ -10,26 +10,40 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const TodoItem = ({ text }) => {
 
-    const [check, setCheck] = useState(false);
+    /* ----- State -----*/
+    const [completed, setCompleted] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
-    const handleCheck = () => {
-        setCheck(!check);
+    /* ----- Functions -----*/
+    const handleCompleted = () => {
+        setCompleted(!completed);
+        alert(`Completaste el TODO: ${text}`);
+    }
+    
+    const handleDeleted = () => {
+        setCompleted(!deleted);
+        alert(`Eliminaste el TODO: ${text}`);
     }
 
     return (
         <ListItem
             secondaryAction={
-                <IconButton edge="end" aria-label="comments">
+                <IconButton
+                    edge='end'
+                    aria-label='comments'
+                    onClick={handleDeleted}
+                    className='delete-icon'
+                >
                     <DeleteIcon />
                 </IconButton>
             }
             disablePadding
         >
-            <ListItemButton dense onClick={handleCheck}>
+            <ListItemButton dense onClick={handleCompleted}>
                 <ListItemIcon>
                     <Checkbox
-                        edge="start"
-                        checked={check}
+                        edge='start'
+                        checked={completed}
                         tabIndex={-1}
                         disableRipple
                     />
