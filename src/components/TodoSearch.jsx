@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 
-const TodoSearch = () => {
-    
+const TodoSearch = ({ searchValue, setSearchValue}) => {
+
     /* ----- Functions -----*/
     const search = (event) => {
         console.log(event.target.value);
+        setSearchValue(event.target.value);
     }
 
     return (
-        <TextField 
+        <TextField
             id='search-input'
-            label='Buscar...'
-            variant='outlined' 
-            size='small'
             fullWidth
+            label='Buscar...'
             onChange={search}
+            size='small'
+            value={searchValue}
+            variant='outlined'
         />
     );
 }

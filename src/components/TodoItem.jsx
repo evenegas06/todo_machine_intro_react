@@ -21,7 +21,7 @@ const TodoItem = ({ text }) => {
     }
     
     const handleDeleted = () => {
-        setCompleted(!deleted);
+        setDeleted(!deleted);
         alert(`Eliminaste el TODO: ${text}`);
     }
 
@@ -48,7 +48,12 @@ const TodoItem = ({ text }) => {
                         disableRipple
                     />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText 
+                    primary={text} 
+                    sx={{
+                        textDecoration: completed && 'line-through'
+                    }}
+                />
             </ListItemButton>
         </ListItem>
     );
