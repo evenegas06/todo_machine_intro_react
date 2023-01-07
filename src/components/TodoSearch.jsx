@@ -8,6 +8,7 @@ const TodoSearch = () => {
             label='Buscar...'
             variant='outlined' 
             size='small'
+            fullWidth
         />
     );
 }

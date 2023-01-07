@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,6 +9,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const TodoItem = ({ text }) => {
+
+    const [check, setCheck] = useState(false);
+
+    const handleCheck = () => {
+        setCheck(!check);
+    }
+
     return (
         <ListItem
             secondaryAction={
@@ -18,11 +25,11 @@ const TodoItem = ({ text }) => {
             }
             disablePadding
         >
-            <ListItemButton dense>
+            <ListItemButton dense onClick={handleCheck}>
                 <ListItemIcon>
                     <Checkbox
                         edge="start"
-                        checked={true}
+                        checked={check}
                         tabIndex={-1}
                         disableRipple
                     />
