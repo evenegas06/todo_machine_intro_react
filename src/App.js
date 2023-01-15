@@ -18,21 +18,39 @@ function App() {
 
     /* ----- States -----*/
     //const [completed, setCompleted] = useState(false);
-    const [todos, setTodos] = useState(defaultTodos);
+    const [todos, setTodos]             = useState(defaultTodos);
     const [searchValue, setSearchValue] = useState('');
 
     /* ----- Variables -----*/
-    const completedTodos = todos.filter(todo => todo.completed).length;
-    const totalTodos = todos.length;
+    const completedTodos    = todos.filter(todo => todo.completed).length;
+    const totalTodos        = todos.length;
 
     let searchedTodos = [];
 
+    /* ----- Functions -----*/
+    const completeTodo = (text) => {
+        const todoIndex = todos.findIndex((todo) => todo.text === text);
+        const newTodos  = [...todos];
+        
+        newTodos[todoIndex].completed = !todos[todoIndex].completed;
+        setTodos(newTodos); 
+    }
+    
+    const deleteTodo = (text) => {
+        const todoIndex = todos.findIndex((todo) => todo.text === text);
+        const newTodos  = [...todos];
+        
+        newTodos.splice(todoIndex, 1);
+        setTodos(newTodos); 
+    }
+
+    /* ----- Logic -----*/
     if (!searchValue.length >= 1) {
         searchedTodos = todos;
     } else {
         searchedTodos = todos.filter((todo) => {
-            const todoText = todo.text.toLocaleLowerCase();
-            const searchText = searchValue.toLocaleLowerCase();
+            const todoText      = todo.text.toLocaleLowerCase();
+            const searchText    = searchValue.toLocaleLowerCase();
             
             return todoText.includes(searchText);
         });
@@ -55,7 +73,9 @@ function App() {
                             <TodoItem
                                 key={index}
                                 text={todo.text}
-                                temp={todo.completed}
+                                completed={todo.completed}
+                                handleCompleted={() => completeTodo(todo.text)}
+                                onDelete={() => deleteTodo(todo.text)}
                             />
                         )
                     })}

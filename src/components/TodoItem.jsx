@@ -8,22 +8,22 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const TodoItem = ({ text, temp }) => {
+const TodoItem = ({ text, completed, handleCompleted, onDelete }) => {
 
     /* ----- State -----*/
-    const [completed, setCompleted] = useState(temp);
-    const [deleted, setDeleted] = useState(false);
+    // const [completed, setCompleted] = useState(temp);
+    //const [deleted, setDeleted] = useState(false);
 
     /* ----- Functions -----*/
-    const handleCompleted = () => {
-        setCompleted(!completed);
-        alert(`Completaste el TODO: ${text}`);
-    }
+    // const handleCompleted = () => {
+    //     setCompleted(!completed);
+    //     alert(`Completaste el TODO: ${text}`);
+    // }
 
-    const handleDeleted = () => {
-        setDeleted(!deleted);
-        alert(`Eliminaste el TODO: ${text}`);
-    }
+    // const handleDeleted = () => {
+    //     setDeleted(!deleted);
+    //     alert(`Eliminaste el TODO: ${text}`);
+    // }
 
     return (
         <ListItem
@@ -31,7 +31,7 @@ const TodoItem = ({ text, temp }) => {
                 <IconButton
                     edge='end'
                     aria-label='comments'
-                    onClick={handleDeleted}
+                    onClick={onDelete}
                     className='delete-icon'
                 >
                     <DeleteIcon />
