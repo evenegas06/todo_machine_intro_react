@@ -6,41 +6,56 @@ import TodoItem from './components/TodoItem';
 import TodoList from './components/TodoList';
 import { Grid } from '@mui/material';
 
+/* ----- Variables -----*/
+const defaultTodos = [
+    { text: 'Terminar TODO App', completed: false },
+    { text: 'Trabajar', completed: true },
+    { text: 'Comer', completed: true },
+    { text: 'Ser la pistola...', completed: true },
+];
+
 function App() {
-
-    /* ----- Variables -----*/
-    const defaultTodos = [
-        'Terminar TODO App',
-        'Trabajar',
-        'Comer',
-        'Ser la pistola...'
-    ];
-
-    //const completedTodos = 
-
 
     /* ----- States -----*/
     //const [completed, setCompleted] = useState(false);
     const [todos, setTodos] = useState(defaultTodos);
     const [searchValue, setSearchValue] = useState('');
 
+    /* ----- Variables -----*/
+    const completedTodos = todos.filter(todo => todo.completed).length;
+    const totalTodos = todos.length;
+
+    let searchedTodos = [];
+
+    if (!searchValue.length >= 1) {
+        searchedTodos = todos;
+    } else {
+        searchedTodos = todos.filter((todo) => {
+            const todoText = todo.text.toLocaleLowerCase();
+            const searchText = searchValue.toLocaleLowerCase();
+            
+            return todoText.includes(searchText);
+        });
+    }
+
     return (
         <Grid container justifyContent='center' alignItems='center'>
             <Grid item xs={8}>
-                <TodoCounter />
+                <TodoCounter
+                    total={totalTodos}
+                    completed={completedTodos}
+                />
                 <TodoSearch
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
                 />
                 <TodoList>
-                    {todos.map((todo, index) => {
+                    {searchedTodos.map((todo, index) => {
                         return (
                             <TodoItem
                                 key={index}
-                                text={todo}
-                            //completed={completed}
-                            //setCompleted={setCompleted}
-                            //onClick={handleCompleted}
+                                text={todo.text}
+                                temp={todo.completed}
                             />
                         )
                     })}

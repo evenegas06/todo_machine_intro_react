@@ -8,10 +8,10 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const TodoItem = ({ text }) => {
+const TodoItem = ({ text, temp }) => {
 
     /* ----- State -----*/
-    const [completed, setCompleted] = useState(false);
+    const [completed, setCompleted] = useState(temp);
     const [deleted, setDeleted] = useState(false);
 
     /* ----- Functions -----*/
@@ -19,7 +19,7 @@ const TodoItem = ({ text }) => {
         setCompleted(!completed);
         alert(`Completaste el TODO: ${text}`);
     }
-    
+
     const handleDeleted = () => {
         setDeleted(!deleted);
         alert(`Eliminaste el TODO: ${text}`);
