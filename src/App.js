@@ -5,6 +5,7 @@ import CreateTodoButton from './components/CreateTodoButton';
 import TodoItem from './components/TodoItem';
 import TodoList from './components/TodoList';
 import { Grid } from '@mui/material';
+import useLocalStorage from './hooks/useLocalStorage';
 
 /* ----- Variables -----*/
 const defaultTodos = [
@@ -15,17 +16,15 @@ const defaultTodos = [
 ];
 
 function App() {
-
+    const [todos, saveTodos] = useLocalStorage('TODOS_V1');
+    
     /* ----- States -----*/
-    //const [completed, setCompleted] = useState(false);
-    const [todos, setTodos]             = useState(defaultTodos);
     const [searchValue, setSearchValue] = useState('');
 
     /* ----- Variables -----*/
     const completedTodos    = todos.filter(todo => todo.completed).length;
     const totalTodos        = todos.length;
-
-    let searchedTodos = [];
+    let searchedTodos       = [];
 
     /* ----- Functions -----*/
     const completeTodo = (text) => {
@@ -33,7 +32,7 @@ function App() {
         const newTodos  = [...todos];
         
         newTodos[todoIndex].completed = !todos[todoIndex].completed;
-        setTodos(newTodos); 
+        saveTodos(newTodos); 
     }
     
     const deleteTodo = (text) => {
@@ -41,7 +40,7 @@ function App() {
         const newTodos  = [...todos];
         
         newTodos.splice(todoIndex, 1);
-        setTodos(newTodos); 
+        saveTodos(newTodos); 
     }
 
     /* ----- Logic -----*/
